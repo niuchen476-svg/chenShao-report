@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晨哨 · 三Claw协同机制汇报</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --green: #00C853;
+    --gold: #FFD700;
+    --glow: #00FF7F;
+    --bg: #060A06;
+    --card: #0D150D;
+    --card2: #111D11;
+    --red: #FF3D3D;
+    --text: #E8F5E9;
+    --muted: #4CAF50;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif SC', serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== SLIDE SYSTEM ===== */
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,200,83,0.1);
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+  }
+
+  /* ===== BACKGROUND EFFECTS ===== */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,83,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,83,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+  }
+
+  /* ===== SLIDE 1: COVER ===== */
+  #s1 {
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,200,83,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255,215,0,0.05) 0%, transparent 60%);
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  .cover-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cover-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .cover-title {
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .cover-title .zh { color: var(--text); }
+  .cover-title .en {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(20px, 3vw, 36px);
+    font-weight: 400;
+    color: var(--green);
+    display: block;
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+
+  .cover-sub {
+    font-size: 16px;
+    color: rgba(232,245,233,0.5);
+    margin-top: 32px;
+    line-height: 2;
+    max-width: 500px;
+  }
+
+  .cover-badges {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    padding: 6px 16px;
+    border: 1px solid rgba(0,200,83,0.3);
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 1px;
+  }
+
+  .cover-visual {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    opacity: 0.15;
+  }
+
+  /* ===== SECTION HEADER ===== */
+  .sec-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,200,83,0.2);
+    max-width: 200px;
+  }
+
+  .sec-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  .gold { color: var(--gold); }
+  .green { color: var(--green); }
+
+  /* ===== SLIDE 2: PROBLEM ===== */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .problem-card {
+    background: var(--card);
+    border: 1px solid rgba(0,200,83,0.1);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--green);
+    opacity: 0.4;
+  }
+
+  .problem-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(0,200,83,0.1);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .problem-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .problem-desc {
+    font-size: 14px;
+    color: rgba(232,245,233,0.6);
+    line-height: 1.8;
+  }
+
+  /* ===== SLIDE 3: ARCHITECTURE ===== */
+  .arch-container {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 80px 1fr;
+    gap: 0;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .claw-card {
+    background: var(--card);
+    border: 1px solid rgba(0,200,83,0.15);
+    padding: 28px 24px;
+    position: relative;
+    text-align: center;
+  }
+
+  .claw-card.active {
+    border-color: var(--green);
+    box-shadow: 0 0 30px rgba(0,200,83,0.15), inset 0 0 30px rgba(0,200,83,0.03);
+  }
+
+  .claw-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .claw-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .claw-role {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .claw-desc {
+    font-size: 12px;
+    color: rgba(232,245,233,0.5);
+    line-height: 1.7;
+  }
+
+  .claw-tech {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tech-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    background: rgba(0,200,83,0.08);
+    border: 1px solid rgba(0,200,83,0.15);
+    color: var(--green);
+    border-radius: 2px;
+  }
+
+  .arch-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .arrow-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--green), rgba(0,200,83,0.2));
+    position: relative;
+  }
+
+  .arrow-line::after {
+    content: '▶';
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    color: var(--green);
+    font-size: 10px;
+  }
+
+  .arrow-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* ===== SLIDE 4: FLOW ===== */
+  .flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .flow-num {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    color: var(--green);
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .flow-num::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 16px;
+    background: rgba(0,200,83,0.2);
+  }
+
+  .flow-step:last-child .flow-num::after { display: none; }
+
+  .flow-content {
+    padding-top: 8px;
+  }
+
+  .flow-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .flow-actor {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  .actor-a { background: rgba(0,200,83,0.15); color: var(--green); }
+  .actor-b { background: rgba(255,215,0,0.15); color: var(--gold); }
+  .actor-c { background: rgba(255,61,61,0.15); color: var(--red); }
+  .actor-sys { background: rgba(255,255,255,0.08); color: rgba(232,245,233,0.6); }
+
+  .flow-desc {
+    font-size: 13px;
+    color: rgba(232,245,233,0.5);
+    line-height: 1.7;
+  }
+
+  .flow-code {
+    margin-top: 8px;
+    padding: 10px 14px;
+    background: rgba(0,200,83,0.05);
+    border-left: 2px solid rgba(0,200,83,0.3);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== SLIDE 5: TOS HANDSHAKE ===== */
+  .tos-diagram {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-top: 8px;
+  }
+
+  .tos-node {
+    background: var(--card);
+    border: 1px solid rgba(0,200,83,0.1);
+    padding: 24px;
+  }
+
+  .tos-node-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tos-node-title .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .tos-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .tos-step-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tos-step-text {
+    font-size: 13px;
+    color: rgba(232,245,233,0.7);
+    line-height: 1.6;
+  }
+
+  .tos-center {
+    background: rgba(0,200,83,0.06);
+    border: 1px solid rgba(0,200,83,0.25);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .tos-bucket {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .tos-bucket-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .tos-files {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+  }
+
+  .tos-file {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.3);
+    color: rgba(232,245,233,0.6);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tos-file .status-ok { color: var(--green); }
+  .tos-file .status-key { color: var(--gold); }
+
+  /* ===== SLIDE 6: VALUE ===== */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .value-card {
+    background: var(--card);
+    border: 1px solid rgba(0,200,83,0.1);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .value-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), transparent);
+  }
+
+  .value-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .value-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .value-desc {
+    font-size: 13px;
+    color: rgba(232,245,233,0.6);
+    line-height: 1.8;
+  }
+
+  .value-metric {
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .value-metric span {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ===== SLIDE 7: RESULT ===== */
+  .result-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .result-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .result-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: rgba(232,245,233,0.7);
+    line-height: 1.6;
+  }
+
+  .result-list li::before {
+    content: '✦';
+    color: var(--green);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .result-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stack-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .stack-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    width: 80px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+
+  .stack-bar {
+    flex: 1;
+    height: 28px;
+    background: rgba(0,200,83,0.06);
+    border: 1px solid rgba(0,200,83,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stack-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,200,83,0.4), rgba(0,200,83,0.1));
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 1px;
+  }
+
+  /* ===== FINAL SLIDE ===== */
+  #sfinal {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, rgba(0,200,83,0.08) 0%, transparent 70%);
+  }
+
+  .final-title {
+    font-size: clamp(48px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .final-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    margin-bottom: 48px;
+  }
+
+  .final-url {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--green);
+    padding: 14px 32px;
+    border: 1px solid rgba(0,200,83,0.3);
+    display: inline-block;
+    letter-spacing: 1px;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: var(--green);
+    margin: 24px 0;
+    opacity: 0.5;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .pulse { animation: pulse 2s infinite; }
+  .float { animation: float 3s ease-in-out infinite; }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+  }
+
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0,200,83,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav-dot.active {
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    background: rgba(0,200,83,0.06);
+    border: 1px solid rgba(0,200,83,0.2);
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    margin-top: 24px;
+    font-size: 14px;
+    color: rgba(232,245,233,0.8);
+    line-height: 1.8;
+  }
+
+  .highlight-box strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-dot active" onclick="scrollTo(0)"></div>
+  <div class="nav-dot" onclick="scrollSlide(1)"></div>
+  <div class="nav-dot" onclick="scrollSlide(2)"></div>
+  <div class="nav-dot" onclick="scrollSlide(3)"></div>
+  <div class="nav-dot" onclick="scrollSlide(4)"></div>
+  <div class="nav-dot" onclick="scrollSlide(5)"></div>
+  <div class="nav-dot" onclick="scrollSlide(6)"></div>
+  <div class="nav-dot" onclick="scrollSlide(7)"></div>
+</nav>
+
+<!-- ===== SLIDE 1: COVER ===== -->
+<section class="slide" id="s1">
+  <div class="bg-grid"></div>
+  <div class="cover-tag">2026 FIFA WORLD CUP · AI AGENT PROJECT</div>
+  <div class="cover-title">
+    <span class="zh">晨哨</span>
+    <span class="en">MORNING WHISTLE</span>
+  </div>
+  <div class="divider"></div>
+  <p class="cover-sub">
+    基于三Claw协同架构的<br>
+    世界杯每日AI数字员工系统<br>
+    模拟企业真实生产场景的智能体协作实践
+  </p>
+  <div class="cover-badges">
+    <div class="badge">ArkClaw × 3</div>
+    <div class="badge">TOS 对象存储</div>
+    <div class="badge">飞书机器人</div>
+    <div class="badge">GitHub Pages</div>
+    <div class="badge">Supabase</div>
+  </div>
+
+  <!-- Decorative football SVG -->
+  <svg class="cover-visual float" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" stroke="#00C853" stroke-width="1" opacity="0.3"/>
+    <circle cx="100" cy="100" r="70" stroke="#00C853" stroke-width="0.5" opacity="0.2"/>
+    <circle cx="100" cy="100" r="50" stroke="#FFD700" stroke-width="0.5" opacity="0.15"/>
+    <polygon points="100,20 120,60 160,60 130,85 140,125 100,100 60,125 70,85 40,60 80,60" fill="none" stroke="#00C853" stroke-width="0.5" opacity="0.4"/>
+  </svg>
+
+  <div class="slide-num">01 / 08</div>
+</section>
+
+<!-- ===== SLIDE 2: BACKGROUND ===== -->
+<section class="slide" id="s2">
+  <div class="bg-grid"></div>
+  <div class="sec-label">BACKGROUND · 背景与痛点</div>
+  <div class="sec-title">为什么需要<br><span class="gold">三个智能体</span>协同？</div>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-num">01</div>
+      <div class="problem-title">信息分散，人工整合低效</div>
+      <div class="problem-desc">赛事数据、舆情热点、AI预测来自不同数据源，人工每日汇总耗时2小时以上，且容易遗漏关键信息。</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">02</div>
+      <div class="problem-title">单一Agent能力有限</div>
+      <div class="problem-desc">一个Agent同时处理API调用、舆情分析、内容生成，任务耦合导致失败率高，难以定位问题根源。</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">03</div>
+      <div class="problem-title">无法7×24小时自动运行</div>
+      <div class="problem-desc">依赖人工触发的信息推送，无法保证每日定时交付，遇到网络异常或人员变动时系统立即失效。</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>解决方案：</strong>借鉴企业微服务架构思想，将复杂任务拆解为三个<strong>职责单一、独立运行</strong>的ArkClaw实例，通过TOS对象存储实现<strong>异步解耦协作</strong>，构建7×24小时自动化生产流水线。
+  </div>
+
+  <div class="slide-num">02 / 08</div>
+</section>
+
+<!-- ===== SLIDE 3: ARCHITECTURE ===== -->
+<section class="slide" id="s3">
+  <div class="bg-grid"></div>
+  <div class="sec-label">ARCHITECTURE · 系统架构</div>
+  <div class="sec-title">三Claw<span class="green">分工架构</span></div>
+
+  <div class="arch-container">
+    <!-- Claw-A -->
+    <div class="claw-card">
+      <span class="claw-icon">📊</span>
+      <div class="claw-name">CLAW-A</div>
+      <div class="claw-role">数据官</div>
+      <div class="claw-desc">负责所有赛事相关数据的采集与结构化处理</div>
+      <div class="claw-tech">
+        <div class="tech-tag">football-data.org API</div>
+        <div class="tech-tag">赛程 · 比分 · 积分</div>
+        <div class="tech-tag">B站舆情评论抓取</div>
+        <div class="tech-tag">→ 写入 TOS/matches.json</div>
+        <div class="tech-tag">→ 写入 TOS/hot_topics.json</div>
+      </div>
+    </div>
+
+    <!-- Arrow A→C -->
+    <div class="arch-arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">TOS<br>写入</div>
+    </div>
+
+    <!-- Claw-C CENTER -->
+    <div class="claw-card active">
+      <span class="claw-icon">🔔</span>
+      <div class="claw-name">CLAW-C</div>
+      <div class="claw-role">报告官</div>
+      <div class="claw-desc">核心整合引擎，负责数据聚合、内容生成与全渠道分发</div>
+      <div class="claw-tech">
+        <div class="tech-tag">监听 TOS/ready.json</div>
+        <div class="tech-tag">数据整合 + AI分析</div>
+        <div class="tech-tag">→ 推送 GitHub Pages</div>
+        <div class="tech-tag">→ 推送飞书群</div>
+        <div class="tech-tag">定时任务 08:00</div>
+      </div>
+    </div>
+
+    <!-- Arrow B→C -->
+    <div class="arch-arrow">
+      <div class="arrow-line" style="background:linear-gradient(90deg,rgba(0,200,83,0.2),var(--gold));"></div>
+      <div class="arrow-label">TOS<br>写入</div>
+    </div>
+
+    <!-- Claw-B -->
+    <div class="claw-card">
+      <span class="claw-icon">🎯</span>
+      <div class="claw-name">CLAW-B</div>
+      <div class="claw-role">舆情官</div>
+      <div class="claw-desc">负责AI胜负概率预测与深度分析专栏内容生成</div>
+      <div class="claw-tech">
+        <div class="tech-tag">联网搜索 Harness</div>
+        <div class="tech-tag">AI胜率预测模型</div>
+        <div class="tech-tag">赔率计算分析</div>
+        <div class="tech-tag">→ 写入 TOS/prediction.json</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">03 / 08</div>
+</section>
+
+<!-- ===== SLIDE 4: FLOW ===== -->
+<section class="slide" id="s4">
+  <div class="bg-grid"></div>
+  <div class="sec-label">WORKFLOW · 执行流程</div>
+  <div class="sec-title">每日自动化<span class="gold">生产流水线</span></div>
+
+  <div class="flow-container">
+    <div class="flow-step">
+      <div class="flow-num">01</div>
+      <div class="flow-content">
+        <div class="flow-title">
+          数据采集触发
+          <span class="flow-actor actor-a">Claw-A</span>
+          <span class="flow-actor actor-b">Claw-B</span>
+        </div>
+        <div class="flow-desc">每天07:50，Claw-A自动调用football-data.org API拉取最新赛程比分，同时抓取B站世界杯热点评论；Claw-B并行执行AI胜率预测分析。</div>
+        <div class="flow-code">ArkClaw定时任务 → Skill执行 → football-data.org + B站评论 → 结构化JSON</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <div class="flow-content">
+        <div class="flow-title">
+          TOS握手信号
+          <span class="flow-actor actor-a">Claw-A</span>
+          <span class="flow-actor actor-sys">TOS存储桶</span>
+        </div>
+        <div class="flow-desc">A/B将处理好的数据写入TOS存储桶后，额外写入ready.json作为握手信号，同时向飞书群发送「✅ 数据已就绪」消息。</div>
+        <div class="flow-code">TOS.put("matches.json") → TOS.put("ready.json", {status:"ready"}) → 飞书通知</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <div class="flow-content">
+        <div class="flow-title">
+          智能体握手响应
+          <span class="flow-actor actor-c">Claw-C</span>
+        </div>
+        <div class="flow-desc">Claw-C每5分钟轮询TOS，检测到ready.json后立即响应，向飞书群回复「🤝 收到，晨哨启动中...」，模拟企业协作中的任务接收确认机制。</div>
+        <div class="flow-code">TOS.get("ready.json") → status==="ready" → 飞书回复握手 → 触发生成任务</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">04</div>
+      <div class="flow-content">
+        <div class="flow-title">
+          数据整合与分发
+          <span class="flow-actor actor-c">Claw-C</span>
+        </div>
+        <div class="flow-desc">Claw-C读取A/B写入的所有数据，调用大模型进行AI分析生成预测文字，整合为标准data.json，同步推送到GitHub Pages更新网页，并向飞书群推送完整晨报。</div>
+        <div class="flow-code">TOS.read() → AI分析 → data.json → GitHub API push → 飞书晨报推送 → TOS.delete("ready.json")</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">04 / 08</div>
+</section>
+
+<!-- ===== SLIDE 5: TOS HANDSHAKE ===== -->
+<section class="slide" id="s5">
+  <div class="bg-grid"></div>
+  <div class="sec-label">CORE MECHANISM · 核心机制</div>
+  <div class="sec-title">TOS异步握手<span class="green">通信协议</span></div>
+
+  <div class="tos-diagram">
+    <!-- Left: A/B -->
+    <div class="tos-node">
+      <div class="tos-node-title"><span class="dot"></span>数据官 / 舆情官</div>
+      <div class="tos-step">
+        <div class="tos-step-num">①</div>
+        <div class="tos-step-text">完成数据采集，将JSON写入TOS存储桶</div>
+      </div>
+      <div class="tos-step">
+        <div class="tos-step-num">②</div>
+        <div class="tos-step-text">写入ready.json握手信号文件，标记数据就绪</div>
+      </div>
+      <div class="tos-step">
+        <div class="tos-step-num">③</div>
+        <div class="tos-step-text">飞书群发送「✅ 数据已就绪，晨哨准备启动」</div>
+      </div>
+      <div style="margin-top:16px;padding:10px;background:rgba(0,200,83,0.05);border:1px solid rgba(0,200,83,0.1);">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--green);">WHY TOS NOT 飞书?</div>
+        <div style="font-size:12px;color:rgba(232,245,233,0.5);margin-top:6px;line-height:1.6;">个人版飞书机器人只能发消息，无法订阅群消息事件。TOS作为共享存储介质，实现Agent间的异步解耦通信，这正是企业级微服务架构的标准模式。</div>
+      </div>
+    </div>
+
+    <!-- Center: TOS -->
+    <div class="tos-center">
+      <div class="tos-bucket float">🪣</div>
+      <div class="tos-bucket-name">worldcup-daily2</div>
+      <div style="font-size:11px;color:rgba(232,245,233,0.4);margin-bottom:16px;font-family:'Space Mono',monospace;">TOS · 华南1广州 · 公共读</div>
+      <div class="tos-files">
+        <div class="tos-file">
+          <span>matches.json</span>
+          <span class="status-ok">● 赛事</span>
+        </div>
+        <div class="tos-file">
+          <span>hot_topics.json</span>
+          <span class="status-ok">● 舆情</span>
+        </div>
+        <div class="tos-file">
+          <span>ready.json</span>
+          <span class="status-key pulse">★ 握手</span>
+        </div>
+        <div class="tos-file">
+          <span>data.json</span>
+          <span class="status-ok">● 整合</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: C -->
+    <div class="tos-node">
+      <div class="tos-node-title"><span class="dot" style="background:var(--gold)"></span>报告官</div>
+      <div class="tos-step">
+        <div class="tos-step-num">①</div>
+        <div class="tos-step-text">每5分钟轮询TOS，检测ready.json是否存在</div>
+      </div>
+      <div class="tos-step">
+        <div class="tos-step-num">②</div>
+        <div class="tos-step-text">检测到握手信号，飞书回复「🤝 收到，晨哨启动」</div>
+      </div>
+      <div class="tos-step">
+        <div class="tos-step-num">③</div>
+        <div class="tos-step-text">读取数据整合，推送GitHub + 飞书晨报</div>
+      </div>
+      <div class="tos-step">
+        <div class="tos-step-num">④</div>
+        <div class="tos-step-text">任务完成，删除ready.json，重置握手状态</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">05 / 08</div>
+</section>
+
+<!-- ===== SLIDE 6: PRODUCT ===== -->
+<section class="slide" id="s6">
+  <div class="bg-grid"></div>
+  <div class="sec-label">PRODUCT · 产品成果</div>
+  <div class="sec-title">三Claw驱动的<span class="gold">球迷平台</span></div>
+
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="value-icon">📅</div>
+      <div class="value-title">每日晨报自动生成</div>
+      <div class="value-desc">每天08:00自动生成包含今日赛程、昨日战报、热点舆情、AI预测的完整晨报，推送至飞书群和公开网页。</div>
+      <div class="value-metric">0<span>人工干预次数</span></div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <div class="value-title">虚拟竞猜系统</div>
+      <div class="value-desc">用户注册获得1000虚拟币，每日签到+50币，对每场比赛进行主胜/平/客胜竞猜，AI动态计算赔率。</div>
+      <div class="value-metric">1000<span>注册奖励虚拟币</span></div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🏆</div>
+      <div class="value-title">全局+好友排行榜</div>
+      <div class="value-desc">三tab切换——小组积分榜/全局竞猜榜/好友榜，实时数据来自Supabase，60秒自动轮询更新。</div>
+      <div class="value-metric">3<span>维度排行榜系统</span></div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">💬</div>
+      <div class="value-title">球队详情+社区评论</div>
+      <div class="value-desc">点击任意球队进入详情页，查看历史战绩、AI夺冠概率、球迷评论。自由评论+点赞+举报机制。</div>
+      <div class="value-metric">48<span>支参赛队伍可查询</span></div>
+    </div>
+  </div>
+
+  <div class="slide-num">06 / 08</div>
+</section>
+
+<!-- ===== SLIDE 7: TECH STACK ===== -->
+<section class="slide" id="s7">
+  <div class="bg-grid"></div>
+  <div class="sec-label">TECH STACK · 技术栈与企业对标</div>
+  <div class="sec-title">对标<span class="green">企业级</span>多Agent架构</div>
+
+  <div class="result-split">
+    <div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:20px;font-family:'Space Mono',monospace;letter-spacing:2px;">ENTERPRISE COMPARISON</div>
+      <div class="result-list">
+        <li><strong style="color:var(--gold)">任务分解</strong>：将复杂业务拆解为数据采集、分析预测、整合分发三个独立职责，对应企业中数据工程师、分析师、运营的协作分工</li>
+        <li><strong style="color:var(--gold)">异步解耦</strong>：Agent间不直接通信，通过TOS共享存储传递数据，降低耦合度，任一Claw故障不影响其他模块</li>
+        <li><strong style="color:var(--gold)">信号驱动</strong>：ready.json握手机制模拟企业消息队列（如Kafka/RabbitMQ）的事件驱动模式，实现生产者-消费者解耦</li>
+        <li><strong style="color:var(--gold)">可观测性</strong>：飞书群全程记录三Claw的握手、启动、完成消息，实现生产流程的可视化监控</li>
+        <li><strong style="color:var(--gold)">弹性扩展</strong>：新增数据源只需接入新Claw，写入TOS即可，无需修改现有Claw逻辑</li>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:20px;font-family:'Space Mono',monospace;letter-spacing:2px;">TECH STACK</div>
+      <div class="result-stack">
+        <div class="stack-row">
+          <div class="stack-label">AGENT</div>
+          <div class="stack-bar"><div class="stack-fill" style="width:100%">ArkClaw × 3 · Agent Plan Small</div></div>
+        </div>
+        <div class="stack-row">
+          <div class="stack-label">STORAGE</div>
+          <div class="stack-bar"><div class="stack-fill" style="width:85%">火山引擎 TOS · worldcup-daily2</div></div>
+        </div>
+        <div class="stack-row">
+          <div class="stack-label">FRONTEND</div>
+          <div class="stack-bar"><div class="stack-fill" style="width:90%">GitHub Pages · 单文件HTML</div></div>
+        </div>
+        <div class="stack-row">
+          <div class="stack-label">DATABASE</div>
+          <div class="stack-bar"><div class="stack-fill" style="width:75%">Supabase · PostgreSQL</div></div>
+        </div>
+        <div class="stack-row">
+          <div class="stack-label">NOTIFY</div>
+          <div class="stack-bar"><div class="stack-fill" style="width:70%">飞书自定义机器人 Webhook</div></div>
+        </div>
+        <div class="stack-row">
+          <div class="stack-label">DATA</div>
+          <div class="stack-bar"><div class="stack-fill" style="width:65%">football-data.org · B站评论</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">07 / 08</div>
+</section>
+
+<!-- ===== FINAL SLIDE ===== -->
+<section class="slide" id="sfinal">
+  <div class="bg-grid"></div>
+  <div class="bg-glow" style="width:400px;height:400px;background:rgba(0,200,83,0.06);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+
+  <div class="final-title">
+    <span class="green">晨</span><span class="gold">哨</span>
+  </div>
+  <div class="final-sub">MORNING WHISTLE · THREE CLAWS · ONE MISSION</div>
+
+  <div style="font-size:15px;color:rgba(232,245,233,0.5);max-width:500px;text-align:center;line-height:2;margin-bottom:32px;">
+    三个智能体，各司其职<br>
+    一套握手协议，无缝协同<br>
+    每天08:00，准时响哨
+  </div>
+
+  <div class="final-url">https://niuchen476-svg.github.io/worldcup--daily/</div>
+
+  <div style="margin-top:48px;display:flex;gap:32px;justify-content:center;">
+    <div style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace;font-size:28px;color:var(--green);font-weight:700;">3</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">ArkClaw实例</div>
+    </div>
+    <div style="width:1px;background:rgba(0,200,83,0.2)"></div>
+    <div style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace;font-size:28px;color:var(--gold);font-weight:700;">0</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">人工干预</div>
+    </div>
+    <div style="width:1px;background:rgba(0,200,83,0.2)"></div>
+    <div style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace;font-size:28px;color:var(--green);font-weight:700;">7×24</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">自动运行</div>
+    </div>
+    <div style="width:1px;background:rgba(0,200,83,0.2)"></div>
+    <div style="text-align:center;">
+      <div style="font-family:'Space Mono',monospace;font-size:28px;color:var(--gold);font-weight:700;">08:00</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">每日准时推送</div>
+    </div>
+  </div>
+
+  <div class="slide-num">08 / 08</div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.nav-dot');
+
+  function scrollSlide(index) {
+    slides[index].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = Array.from(slides).indexOf(entry.target);
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(slide => observer.observe(slide));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const current = Array.from(slides).findIndex(s => {
+      const rect = s.getBoundingClientRect();
+      return rect.top >= -100 && rect.top < window.innerHeight / 2;
+    });
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      if (current < slides.length - 1) scrollSlide(current + 1);
+    }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      if (current > 0) scrollSlide(current - 1);
+    }
+  });
+</script>
+</body>
+</html>
