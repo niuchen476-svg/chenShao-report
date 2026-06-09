@@ -769,6 +769,192 @@
     opacity: 0.5;
   }
 
+  /* ===== LAUNCH BUTTON ===== */
+  .launch-btn {
+    margin-top: 40px;
+    padding: 14px 44px;
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .launch-btn:hover {
+    background: rgba(0,200,83,0.1);
+    box-shadow: 0 0 24px rgba(0,200,83,0.3);
+  }
+
+  .launch-btn::before {
+    content: '⚡';
+    font-size: 14px;
+  }
+
+  .launch-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(6,10,6,0.96);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+
+  .launch-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .launch-modal {
+    text-align: center;
+    max-width: 480px;
+    padding: 48px;
+    border: 1px solid rgba(0,200,83,0.2);
+    background: var(--card);
+  }
+
+  .launch-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .launch-status {
+    font-size: 16px;
+    color: var(--green);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 2px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+    min-height: 56px;
+  }
+
+  .launch-dots {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .launch-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: dotBounce 1.2s infinite;
+  }
+
+  .launch-dot:nth-child(2) { animation-delay: 0.2s; }
+  .launch-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes dotBounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1.2); opacity: 1; }
+  }
+
+  /* ===== VERIFY SECTION (Slide 5) ===== */
+  .verify-section {
+    margin-top: 28px;
+    border-top: 1px solid rgba(0,200,83,0.1);
+    padding-top: 24px;
+  }
+
+  .verify-label-row {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .verify-label-row::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,200,83,0.15);
+  }
+
+  .verify-desc {
+    font-size: 12px;
+    color: rgba(232,245,233,0.5);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .verify-images {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .verify-img-wrap {
+    flex: 1;
+    background: var(--card2);
+    border: 1px solid rgba(0,200,83,0.1);
+    padding: 12px;
+    text-align: center;
+  }
+
+  .verify-img-wrap img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto 10px;
+  }
+
+  .verify-img-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .verify-img-label.fail {
+    background: rgba(255,61,61,0.15);
+    color: var(--red);
+    border: 1px solid rgba(255,61,61,0.2);
+  }
+
+  .verify-img-label.pass {
+    background: rgba(0,200,83,0.15);
+    color: var(--green);
+    border: 1px solid rgba(0,200,83,0.2);
+  }
+
+  .verify-arrow-mid {
+    font-size: 24px;
+    color: var(--gold);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .verify-arrow-mid span {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
   /* ===== ANIMATIONS ===== */
   @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -826,6 +1012,19 @@
 </head>
 <body>
 
+<!-- LAUNCH OVERLAY -->
+<div class="launch-overlay" id="launchOverlay">
+  <div class="launch-modal">
+    <span class="launch-icon" id="launchIcon">🤖</span>
+    <div class="launch-status" id="launchStatus">正在唤醒您的Claw助手...</div>
+    <div class="launch-dots" id="launchDots">
+      <div class="launch-dot"></div>
+      <div class="launch-dot"></div>
+      <div class="launch-dot"></div>
+    </div>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-dot active" onclick="scrollTo(0)"></div>
@@ -844,7 +1043,7 @@
   <div class="cover-tag">2026 FIFA WORLD CUP · AI AGENT PROJECT</div>
   <div class="cover-title">
     <span class="zh">第90分钟</span>
-    <span class="en">MORNING WHISTLE</span>
+    <span class="en">MINUTE 90</span>
   </div>
   <div class="divider"></div>
   <p class="cover-sub">
@@ -859,6 +1058,7 @@
     <div class="badge">GitHub Pages</div>
     <div class="badge">Supabase</div>
   </div>
+  <button class="launch-btn" onclick="launchSequence()">一键启动</button>
 
   <!-- Decorative football SVG -->
   <svg class="cover-visual float" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1121,6 +1321,26 @@
     </div>
   </div>
 
+  <!-- 交付检验截图 -->
+  <div class="verify-section">
+    <div class="verify-label-row">DELIVERY CHECK · 交付检验实录</div>
+    <div class="verify-desc">首席内容总监对数据进行质量门控，模拟企业真实生产中"交付即检验"的闭环逻辑——未达标自动驳回，重跑后再次校验通过方可放行。</div>
+    <div class="verify-images">
+      <div class="verify-img-wrap">
+        <img src="verify-round1.png" alt="第一次检验-驳回">
+        <div class="verify-img-label fail">❌ 第一次检验 · 驳回重跑</div>
+      </div>
+      <div class="verify-arrow-mid">
+        ▶▶
+        <span>修正后重试</span>
+      </div>
+      <div class="verify-img-wrap">
+        <img src="verify-round2.png" alt="第二次检验-通过">
+        <div class="verify-img-label pass">✅ 第二次检验 · 达标放行</div>
+      </div>
+    </div>
+  </div>
+
   <div class="slide-num">05 / 08</div>
 </section>
 
@@ -1256,6 +1476,37 @@
 </section>
 
 <script>
+  function launchSequence() {
+    const overlay = document.getElementById('launchOverlay');
+    const status = document.getElementById('launchStatus');
+    const icon = document.getElementById('launchIcon');
+    const dotsEl = document.getElementById('launchDots');
+
+    overlay.classList.add('active');
+    icon.textContent = '🤖';
+    status.textContent = '正在唤醒您的Claw助手...';
+    dotsEl.style.display = 'flex';
+
+    setTimeout(() => {
+      icon.textContent = '🔍';
+      status.textContent = '正在爬取信息并\n交付检查中...';
+      status.style.whiteSpace = 'pre';
+    }, 2000);
+
+    setTimeout(() => {
+      icon.textContent = '✅';
+      status.textContent = '最新汇报已经生成\n请查收';
+      status.style.color = 'var(--gold)';
+      dotsEl.style.display = 'none';
+    }, 12000);
+
+    setTimeout(() => {
+      overlay.classList.remove('active');
+      status.style.color = 'var(--green)';
+      status.style.whiteSpace = 'normal';
+    }, 15000);
+  }
+
   const slides = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.nav-dot');
 
