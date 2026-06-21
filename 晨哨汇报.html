@@ -995,6 +995,117 @@
     box-shadow: 0 0 8px var(--green);
   }
 
+  /* ===== SLIDE 9: COMMERCIAL + FUTURE ===== */
+  .biz-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 8px;
+  }
+
+  .biz-sub-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .biz-cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .biz-card {
+    background: var(--card);
+    border: 1px solid rgba(0,200,83,0.1);
+    border-left: 2px solid var(--green);
+    padding: 14px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .biz-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .biz-title { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .biz-desc { font-size: 12px; color: rgba(232,245,233,0.55); line-height: 1.7; }
+
+  .roadmap { display: flex; flex-direction: column; }
+
+  .roadmap-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,200,83,0.08);
+    align-items: flex-start;
+  }
+
+  .roadmap-item:last-child { border-bottom: none; }
+
+  .roadmap-phase {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--green);
+    letter-spacing: 1px;
+    padding: 3px 0;
+    border-right: 1px solid rgba(0,200,83,0.2);
+    text-align: center;
+  }
+
+  .roadmap-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .roadmap-desc { font-size: 12px; color: rgba(232,245,233,0.5); line-height: 1.6; }
+
+  /* ===== SLIDE 10: ACKNOWLEDGMENTS ===== */
+  .ack-layout {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    margin-top: 8px;
+    margin-bottom: 36px;
+  }
+
+  .ack-group-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .ack-members { display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .ack-member { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+  .ack-avatar {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(0,200,83,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: var(--green);
+    background: rgba(0,200,83,0.06);
+  }
+
+  .ack-avatar.advisor { border-color: rgba(255,215,0,0.3); color: var(--gold); background: rgba(255,215,0,0.06); }
+  .ack-name { font-size: 14px; color: var(--text); font-weight: 700; }
+
+  .ack-divider { width: 1px; background: rgba(0,200,83,0.15); align-self: stretch; margin-top: 28px; }
+
+  .ref-section { border-top: 1px solid rgba(0,200,83,0.1); padding-top: 20px; }
+
+  .ref-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;
+  }
+
+  .ref-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .ref-item { display: flex; gap: 12px; font-size: 12px; color: rgba(232,245,233,0.55); line-height: 1.6; }
+
+  .ref-num { font-family: 'Space Mono', monospace; color: var(--green); flex-shrink: 0; font-size: 11px; }
+
+  .ref-link { color: var(--green); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 10px; }
+  .ref-link:hover { text-decoration: underline; }
+
   /* ===== HIGHLIGHT BOX ===== */
   .highlight-box {
     background: rgba(0,200,83,0.06);
@@ -1035,6 +1146,8 @@
   <div class="nav-dot" onclick="scrollSlide(5)"></div>
   <div class="nav-dot" onclick="scrollSlide(6)"></div>
   <div class="nav-dot" onclick="scrollSlide(7)"></div>
+  <div class="nav-dot" onclick="scrollSlide(8)"></div>
+  <div class="nav-dot" onclick="scrollSlide(9)"></div>
 </nav>
 
 <!-- ===== SLIDE 1: COVER ===== -->
@@ -1068,7 +1181,7 @@
     <polygon points="100,20 120,60 160,60 130,85 140,125 100,100 60,125 70,85 40,60 80,60" fill="none" stroke="#00C853" stroke-width="0.5" opacity="0.4"/>
   </svg>
 
-  <div class="slide-num">01 / 08</div>
+  <div class="slide-num">01 / 10</div>
 </section>
 
 <!-- ===== SLIDE 2: BACKGROUND ===== -->
@@ -1099,7 +1212,7 @@
     <strong>解决方案：</strong>借鉴企业微服务架构思想，将复杂任务拆解为三个<strong>职责单一、独立运行</strong>的ArkClaw实例，通过TOS对象存储实现<strong>异步解耦协作</strong>，构建7×24小时自动化生产流水线。
   </div>
 
-  <div class="slide-num">02 / 08</div>
+  <div class="slide-num">02 / 10</div>
 </section>
 
 <!-- ===== SLIDE 3: ARCHITECTURE ===== -->
@@ -1182,7 +1295,7 @@
     </div>
   </div>
 
-  <div class="slide-num">03 / 08</div>
+  <div class="slide-num">03 / 10</div>
 </section>
 
 <!-- ===== SLIDE 4: FLOW ===== -->
@@ -1243,7 +1356,7 @@
     </div>
   </div>
 
-  <div class="slide-num">04 / 08</div>
+  <div class="slide-num">04 / 10</div>
 </section>
 
 <!-- ===== SLIDE 5: TOS HANDSHAKE ===== -->
@@ -1341,7 +1454,7 @@
     </div>
   </div>
 
-  <div class="slide-num">05 / 08</div>
+  <div class="slide-num">05 / 10</div>
 </section>
 
 <!-- ===== SLIDE 6: PRODUCT ===== -->
@@ -1377,7 +1490,7 @@
     </div>
   </div>
 
-  <div class="slide-num">06 / 08</div>
+  <div class="slide-num">06 / 10</div>
 </section>
 
 <!-- ===== SLIDE 7: TECH STACK ===== -->
@@ -1429,7 +1542,7 @@
     </div>
   </div>
 
-  <div class="slide-num">07 / 08</div>
+  <div class="slide-num">07 / 10</div>
 </section>
 
 <!-- ===== FINAL SLIDE ===== -->
@@ -1472,7 +1585,155 @@
     </div>
   </div>
 
-  <div class="slide-num">08 / 08</div>
+  <div class="slide-num">08 / 10</div>
+</section>
+
+<!-- ===== SLIDE 9: COMMERCIAL + FUTURE ===== -->
+<section class="slide" id="s9">
+  <div class="bg-grid"></div>
+  <div class="sec-label">OPPORTUNITY · 商业潜能与未来规划</div>
+  <div class="sec-title">从课堂实验到<span class="gold">真实产品</span></div>
+
+  <div class="biz-layout">
+    <div>
+      <div class="biz-sub-label">COMMERCIAL POTENTIAL · 商业潜能</div>
+      <div class="biz-cards">
+        <div class="biz-card">
+          <div class="biz-icon">📰</div>
+          <div>
+            <div class="biz-title">体育内容自动化服务</div>
+            <div class="biz-desc">向体育媒体平台、赛事运营方输出"AI日报机器人"能力，按日/赛事收费，大幅降低内容团队人力成本。</div>
+          </div>
+        </div>
+        <div class="biz-card">
+          <div class="biz-icon">📊</div>
+          <div>
+            <div class="biz-title">AI预测数据订阅</div>
+            <div class="biz-desc">将ELO+泊松预测模型包装为付费API，面向球迷社区、数据分析师、媒体机构提供赛前胜率订阅服务。</div>
+          </div>
+        </div>
+        <div class="biz-card">
+          <div class="biz-icon">🏗️</div>
+          <div>
+            <div class="biz-title">企业多Agent架构模板</div>
+            <div class="biz-desc">三Claw协同框架可复用于新闻晨报、财报监控、电商选品等场景，包装为低代码企业自动化解决方案。</div>
+          </div>
+        </div>
+        <div class="biz-card">
+          <div class="biz-icon">🎮</div>
+          <div>
+            <div class="biz-title">合规虚拟竞猜平台</div>
+            <div class="biz-desc">以虚拟货币替代真实资金，结合好友社交与积分体系，打造体育兴趣社群变现闭环，规避监管风险。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="biz-sub-label">ROADMAP · 迭代方向</div>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <div class="roadmap-phase">近期</div>
+          <div>
+            <div class="roadmap-title">WebSocket 实时比分</div>
+            <div class="roadmap-desc">接入 SSE / WebSocket，比赛进行中逐分钟推送，告别5分钟轮询延迟</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-phase">中期</div>
+          <div>
+            <div class="roadmap-title">多赛事横向扩展</div>
+            <div class="roadmap-desc">架构复用至 NBA、欧冠、奥运，新增赛事只需接入新数据源 Claw，核心链路零改动</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-phase">中期</div>
+          <div>
+            <div class="roadmap-title">预测模型深化</div>
+            <div class="roadmap-desc">引入更长周期历史数据，尝试 Transformer 时序模型替代泊松分布，提升预测置信度</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-phase">远期</div>
+          <div>
+            <div class="roadmap-title">第四 Claw：战术分析官</div>
+            <div class="roadmap-desc">新增专司战术图解生成的 Agent，自动输出阵型对比、热力图等可视化内容，丰富晨报深度</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">09 / 10</div>
+</section>
+
+<!-- ===== SLIDE 10: ACKNOWLEDGMENTS ===== -->
+<section class="slide" id="s10">
+  <div class="bg-grid"></div>
+  <div class="bg-glow" style="width:600px;height:600px;background:rgba(255,215,0,0.03);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+
+  <div class="sec-label">ACKNOWLEDGMENTS · 鸣谢</div>
+  <div class="sec-title">感谢每一位<span class="gold">共同响哨</span>的伙伴</div>
+
+  <div class="ack-layout">
+    <div>
+      <div class="ack-group-label">小组成员</div>
+      <div class="ack-members">
+        <div class="ack-member">
+          <div class="ack-avatar">郑</div>
+          <div class="ack-name">郑秋诺</div>
+        </div>
+        <div class="ack-member">
+          <div class="ack-avatar">杨</div>
+          <div class="ack-name">杨林涛</div>
+        </div>
+        <div class="ack-member">
+          <div class="ack-avatar">董</div>
+          <div class="ack-name">董卓然</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ack-divider"></div>
+
+    <div>
+      <div class="ack-group-label">指导老师</div>
+      <div class="ack-members">
+        <div class="ack-member">
+          <div class="ack-avatar advisor">朱</div>
+          <div class="ack-name">朱朝阳</div>
+        </div>
+        <div class="ack-member">
+          <div class="ack-avatar advisor">周</div>
+          <div class="ack-name">周渝松</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-label">REFERENCES · 参考文献</div>
+    <div class="ref-list">
+      <div class="ref-item">
+        <span class="ref-num">[1]</span>
+        <span>Wu, Q. et al. "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework." <em>arXiv:2308.08155</em>, 2023. <a href="https://arxiv.org/abs/2308.08155" target="_blank" class="ref-link">arxiv.org/abs/2308.08155</a></span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[2]</span>
+        <span>Weng, L. "LLM Powered Autonomous Agents." <em>Lil'Log</em>, 2023. <a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" class="ref-link">lilianweng.github.io/posts/2023-06-23-agent</a></span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[3]</span>
+        <span>Park, J.S. et al. "Generative Agents: Interactive Simulacra of Human Behavior." <em>UIST 2023, arXiv:2304.03442</em>. <a href="https://arxiv.org/abs/2304.03442" target="_blank" class="ref-link">arxiv.org/abs/2304.03442</a></span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-num">[4]</span>
+        <span>football-data.org. "Free football data for developers." API Documentation. <a href="https://www.football-data.org/documentation/api" target="_blank" class="ref-link">football-data.org/documentation/api</a></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-num">10 / 10</div>
 </section>
 
 <script>
