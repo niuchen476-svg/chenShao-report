@@ -329,93 +329,6 @@
     white-space: nowrap;
   }
 
-  /* ===== SLIDE 3: TRIANGLE LAYOUT ===== */
-  .arch-tri {
-    max-width: 900px;
-    margin: 8px auto 0;
-  }
-
-  .arch-tri-top {
-    display: flex;
-    align-items: stretch;
-  }
-
-  .arch-tri-top .claw-card {
-    flex: 0 0 260px;
-  }
-
-  .arch-h-arrow {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    gap: 8px;
-  }
-
-  .arch-h-line {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, var(--green), rgba(0,200,83,0.3));
-    position: relative;
-  }
-
-  .arch-h-line::after {
-    content: '▶';
-    position: absolute;
-    right: -8px;
-    top: -8px;
-    color: var(--green);
-    font-size: 10px;
-  }
-
-  .arch-h-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .arch-tri-svg {
-    display: block;
-    margin: 0 auto;
-    width: 900px;
-    max-width: 100%;
-    height: 80px;
-  }
-
-  .arch-tri-bot {
-    display: flex;
-    justify-content: center;
-  }
-
-  .claw-card.director.active {
-    border-color: var(--gold);
-    box-shadow: 0 0 40px rgba(255,215,0,0.25), inset 0 0 40px rgba(255,215,0,0.05);
-  }
-
-  .claw-card.director {
-    width: 440px;
-  }
-
-  .claw-card.director .claw-icon {
-    font-size: 52px;
-  }
-
-  .claw-card.director .claw-role {
-    font-size: 24px;
-    color: var(--gold);
-  }
-
-  .claw-card.director .claw-tech {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   /* ===== SLIDE 4: FLOW ===== */
   .flow-container {
     display: flex;
@@ -769,192 +682,6 @@
     opacity: 0.5;
   }
 
-  /* ===== LAUNCH BUTTON ===== */
-  .launch-btn {
-    margin-top: 40px;
-    padding: 14px 44px;
-    background: transparent;
-    border: 1px solid var(--green);
-    color: var(--green);
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .launch-btn:hover {
-    background: rgba(0,200,83,0.1);
-    box-shadow: 0 0 24px rgba(0,200,83,0.3);
-  }
-
-  .launch-btn::before {
-    content: '⚡';
-    font-size: 14px;
-  }
-
-  .launch-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(6,10,6,0.96);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s;
-  }
-
-  .launch-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .launch-modal {
-    text-align: center;
-    max-width: 480px;
-    padding: 48px;
-    border: 1px solid rgba(0,200,83,0.2);
-    background: var(--card);
-  }
-
-  .launch-icon {
-    font-size: 48px;
-    margin-bottom: 24px;
-    display: block;
-  }
-
-  .launch-status {
-    font-size: 16px;
-    color: var(--green);
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 2px;
-    line-height: 1.8;
-    margin-bottom: 32px;
-    min-height: 56px;
-  }
-
-  .launch-dots {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .launch-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: dotBounce 1.2s infinite;
-  }
-
-  .launch-dot:nth-child(2) { animation-delay: 0.2s; }
-  .launch-dot:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes dotBounce {
-    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-    40% { transform: scale(1.2); opacity: 1; }
-  }
-
-  /* ===== VERIFY SECTION (Slide 5) ===== */
-  .verify-section {
-    margin-top: 28px;
-    border-top: 1px solid rgba(0,200,83,0.1);
-    padding-top: 24px;
-  }
-
-  .verify-label-row {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--green);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .verify-label-row::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(0,200,83,0.15);
-  }
-
-  .verify-desc {
-    font-size: 12px;
-    color: rgba(232,245,233,0.5);
-    margin-bottom: 16px;
-    line-height: 1.7;
-  }
-
-  .verify-images {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .verify-img-wrap {
-    flex: 1;
-    background: var(--card2);
-    border: 1px solid rgba(0,200,83,0.1);
-    padding: 12px;
-    text-align: center;
-  }
-
-  .verify-img-wrap img {
-    width: 100%;
-    max-width: 280px;
-    border-radius: 4px;
-    display: block;
-    margin: 0 auto 10px;
-  }
-
-  .verify-img-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1px;
-    padding: 4px 10px;
-    border-radius: 2px;
-    display: inline-block;
-  }
-
-  .verify-img-label.fail {
-    background: rgba(255,61,61,0.15);
-    color: var(--red);
-    border: 1px solid rgba(255,61,61,0.2);
-  }
-
-  .verify-img-label.pass {
-    background: rgba(0,200,83,0.15);
-    color: var(--green);
-    border: 1px solid rgba(0,200,83,0.2);
-  }
-
-  .verify-arrow-mid {
-    font-size: 24px;
-    color: var(--gold);
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .verify-arrow-mid span {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
-
   /* ===== ANIMATIONS ===== */
   @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -1123,19 +850,6 @@
 </head>
 <body>
 
-<!-- LAUNCH OVERLAY -->
-<div class="launch-overlay" id="launchOverlay">
-  <div class="launch-modal">
-    <span class="launch-icon" id="launchIcon">🤖</span>
-    <div class="launch-status" id="launchStatus">正在唤醒您的Claw助手...</div>
-    <div class="launch-dots" id="launchDots">
-      <div class="launch-dot"></div>
-      <div class="launch-dot"></div>
-      <div class="launch-dot"></div>
-    </div>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-dot active" onclick="scrollTo(0)"></div>
@@ -1156,7 +870,7 @@
   <div class="cover-tag">2026 FIFA WORLD CUP · AI AGENT PROJECT</div>
   <div class="cover-title">
     <span class="zh">第90分钟</span>
-    <span class="en">MINUTE 90</span>
+    <span class="en">MORNING WHISTLE</span>
   </div>
   <div class="divider"></div>
   <p class="cover-sub">
@@ -1171,7 +885,6 @@
     <div class="badge">GitHub Pages</div>
     <div class="badge">Supabase</div>
   </div>
-  <button class="launch-btn" onclick="launchSequence()">一键启动</button>
 
   <!-- Decorative football SVG -->
   <svg class="cover-visual float" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1221,76 +934,60 @@
   <div class="sec-label">ARCHITECTURE · 系统架构</div>
   <div class="sec-title">三Claw<span class="green">分工架构</span></div>
 
-  <div class="arch-tri">
-    <!-- 顶行：数据官 ——读取——> 舆情官 -->
-    <div class="arch-tri-top">
-      <!-- Claw-A: 数据官 -->
-      <div class="claw-card">
-        <span class="claw-icon">📊</span>
-        <div class="claw-name">CLAW-A</div>
-        <div class="claw-role">数据官</div>
-        <div class="claw-desc">负责所有赛事相关数据的采集与结构化处理</div>
-        <div class="claw-tech">
-          <div class="tech-tag">football-data.org API</div>
-          <div class="tech-tag">赛程 · 比分 · 积分</div>
-          <div class="tech-tag">B站舆情评论抓取</div>
-          <div class="tech-tag">→ 写入 TOS/matches.json</div>
-        </div>
-      </div>
-
-      <!-- 水平箭头：数据官 → 舆情官 -->
-      <div class="arch-h-arrow">
-        <div class="arch-h-line"></div>
-        <div class="arch-h-label">舆情官读取数据</div>
-      </div>
-
-      <!-- Claw-B: 舆情官 -->
-      <div class="claw-card">
-        <span class="claw-icon">🎯</span>
-        <div class="claw-name">CLAW-B</div>
-        <div class="claw-role">舆情官</div>
-        <div class="claw-desc">读取数据官成果，生成AI预测与深度分析</div>
-        <div class="claw-tech">
-          <div class="tech-tag">联网搜索 Harness</div>
-          <div class="tech-tag">AI胜率预测模型</div>
-          <div class="tech-tag">← 读 TOS/matches.json</div>
-          <div class="tech-tag">→ TOS/prediction.json</div>
-        </div>
+  <div class="arch-container">
+    <!-- Claw-A -->
+    <div class="claw-card">
+      <span class="claw-icon">📊</span>
+      <div class="claw-name">CLAW-A</div>
+      <div class="claw-role">数据舆情官</div>
+      <div class="claw-desc">负责所有赛事相关数据的采集与结构化处理</div>
+      <div class="claw-tech">
+        <div class="tech-tag">football-data.org API</div>
+        <div class="tech-tag">赛程 · 比分 · 积分</div>
+        <div class="tech-tag">B站舆情评论抓取</div>
+        <div class="tech-tag">→ 写入 TOS/matches.json</div>
+        <div class="tech-tag">→ 写入 TOS/hot_topics.json</div>
       </div>
     </div>
 
-    <!-- 斜向箭头 SVG：数据官→总监 / 舆情官→总监 -->
-    <svg class="arch-tri-svg" viewBox="0 0 900 80">
-      <defs>
-        <marker id="arrowG3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-          <polygon points="0 0, 7 3.5, 0 7" fill="#00C853"/>
-        </marker>
-        <marker id="arrowY3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-          <polygon points="0 0, 7 3.5, 0 7" fill="#FFD700"/>
-        </marker>
-      </defs>
-      <!-- 数据官 → 首席内容总监 -->
-      <line x1="130" y1="4" x2="358" y2="74" stroke="#00C853" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowG3)"/>
-      <text x="214" y="32" fill="#4CAF50" font-size="11" font-family="Space Mono,monospace" text-anchor="middle" transform="rotate(17,214,32)">TOS 写入</text>
-      <!-- 舆情官 → 首席内容总监 -->
-      <line x1="770" y1="4" x2="542" y2="74" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowY3)"/>
-      <text x="686" y="32" fill="#FFD700" font-size="11" font-family="Space Mono,monospace" text-anchor="middle" transform="rotate(-17,686,32)">写入总监</text>
-    </svg>
+    <!-- Arrow A→C -->
+    <div class="arch-arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">TOS<br>写入</div>
+    </div>
 
-    <!-- 底部核心：首席内容总监 -->
-    <div class="arch-tri-bot">
-      <div class="claw-card director active">
-        <span class="claw-icon">🔔</span>
-        <div class="claw-name">CLAW-C</div>
-        <div class="claw-role">首席内容总监</div>
-        <div class="claw-desc">核心整合引擎，负责数据聚合、内容生成与全渠道分发</div>
-        <div class="claw-tech">
-          <div class="tech-tag">监听 TOS/ready.json</div>
-          <div class="tech-tag">数据整合 + AI分析</div>
-          <div class="tech-tag">→ 推送 GitHub Pages</div>
-          <div class="tech-tag">→ 推送飞书群</div>
-          <div class="tech-tag">定时任务 08:00</div>
-        </div>
+    <!-- Claw-C CENTER -->
+    <div class="claw-card active">
+      <span class="claw-icon">🔔</span>
+      <div class="claw-name">CLAW-C</div>
+      <div class="claw-role">报告官</div>
+      <div class="claw-desc">核心整合引擎，负责数据聚合、内容生成与全渠道分发</div>
+      <div class="claw-tech">
+        <div class="tech-tag">监听 TOS/ready.json</div>
+        <div class="tech-tag">数据整合 + AI分析</div>
+        <div class="tech-tag">→ 推送 GitHub Pages</div>
+        <div class="tech-tag">→ 推送飞书群</div>
+        <div class="tech-tag">定时任务 08:00</div>
+      </div>
+    </div>
+
+    <!-- Arrow B→C -->
+    <div class="arch-arrow">
+      <div class="arrow-line" style="background:linear-gradient(90deg,rgba(0,200,83,0.2),var(--gold));"></div>
+      <div class="arrow-label">TOS<br>写入</div>
+    </div>
+
+    <!-- Claw-B -->
+    <div class="claw-card">
+      <span class="claw-icon">🎯</span>
+      <div class="claw-name">CLAW-B</div>
+      <div class="claw-role">AI预测官</div>
+      <div class="claw-desc">负责AI胜负概率预测与深度分析专栏内容生成</div>
+      <div class="claw-tech">
+        <div class="tech-tag">联网搜索 Harness</div>
+        <div class="tech-tag">AI胜率预测模型</div>
+        <div class="tech-tag">赔率计算分析</div>
+        <div class="tech-tag">→ 写入 TOS/prediction.json</div>
       </div>
     </div>
   </div>
@@ -1368,7 +1065,7 @@
   <div class="tos-diagram">
     <!-- Left: A/B -->
     <div class="tos-node">
-      <div class="tos-node-title"><span class="dot"></span>数据官 / 舆情官</div>
+      <div class="tos-node-title"><span class="dot"></span>数据舆情官 / AI预测官</div>
       <div class="tos-step">
         <div class="tos-step-num">①</div>
         <div class="tos-step-text">完成数据采集，将JSON写入TOS存储桶</div>
@@ -1414,7 +1111,7 @@
 
     <!-- Right: C -->
     <div class="tos-node">
-      <div class="tos-node-title"><span class="dot" style="background:var(--gold)"></span>首席内容总监</div>
+      <div class="tos-node-title"><span class="dot" style="background:var(--gold)"></span>报告官</div>
       <div class="tos-step">
         <div class="tos-step-num">①</div>
         <div class="tos-step-text">每5分钟轮询TOS，检测ready.json是否存在</div>
@@ -1737,37 +1434,6 @@
 </section>
 
 <script>
-  function launchSequence() {
-    const overlay = document.getElementById('launchOverlay');
-    const status = document.getElementById('launchStatus');
-    const icon = document.getElementById('launchIcon');
-    const dotsEl = document.getElementById('launchDots');
-
-    overlay.classList.add('active');
-    icon.textContent = '🤖';
-    status.textContent = '正在唤醒您的Claw助手...';
-    dotsEl.style.display = 'flex';
-
-    setTimeout(() => {
-      icon.textContent = '🔍';
-      status.textContent = '正在爬取信息并\n交付检查中...';
-      status.style.whiteSpace = 'pre';
-    }, 2000);
-
-    setTimeout(() => {
-      icon.textContent = '✅';
-      status.textContent = '最新汇报已经生成\n请查收';
-      status.style.color = 'var(--gold)';
-      dotsEl.style.display = 'none';
-    }, 12000);
-
-    setTimeout(() => {
-      overlay.classList.remove('active');
-      status.style.color = 'var(--green)';
-      status.style.whiteSpace = 'normal';
-    }, 15000);
-  }
-
   const slides = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.nav-dot');
 
