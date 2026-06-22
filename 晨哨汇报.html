@@ -329,6 +329,93 @@
     white-space: nowrap;
   }
 
+  /* ===== SLIDE 3: TRIANGLE LAYOUT ===== */
+  .arch-tri {
+    max-width: 900px;
+    margin: 8px auto 0;
+  }
+
+  .arch-tri-top {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .arch-tri-top .claw-card {
+    flex: 0 0 260px;
+  }
+
+  .arch-h-arrow {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    gap: 8px;
+  }
+
+  .arch-h-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--green), rgba(0,200,83,0.3));
+    position: relative;
+  }
+
+  .arch-h-line::after {
+    content: '▶';
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    color: var(--green);
+    font-size: 10px;
+  }
+
+  .arch-h-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .arch-tri-svg {
+    display: block;
+    margin: 0 auto;
+    width: 900px;
+    max-width: 100%;
+    height: 80px;
+  }
+
+  .arch-tri-bot {
+    display: flex;
+    justify-content: center;
+  }
+
+  .claw-card.director.active {
+    border-color: var(--gold);
+    box-shadow: 0 0 40px rgba(255,215,0,0.25), inset 0 0 40px rgba(255,215,0,0.05);
+  }
+
+  .claw-card.director {
+    width: 440px;
+  }
+
+  .claw-card.director .claw-icon {
+    font-size: 52px;
+  }
+
+  .claw-card.director .claw-role {
+    font-size: 24px;
+    color: var(--gold);
+  }
+
+  .claw-card.director .claw-tech {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   /* ===== SLIDE 4: FLOW ===== */
   .flow-container {
     display: flex;
@@ -934,60 +1021,76 @@
   <div class="sec-label">ARCHITECTURE · 系统架构</div>
   <div class="sec-title">三Claw<span class="green">分工架构</span></div>
 
-  <div class="arch-container">
-    <!-- Claw-A -->
-    <div class="claw-card">
-      <span class="claw-icon">📊</span>
-      <div class="claw-name">CLAW-A</div>
-      <div class="claw-role">数据舆情官</div>
-      <div class="claw-desc">负责所有赛事相关数据的采集与结构化处理</div>
-      <div class="claw-tech">
-        <div class="tech-tag">football-data.org API</div>
-        <div class="tech-tag">赛程 · 比分 · 积分</div>
-        <div class="tech-tag">B站舆情评论抓取</div>
-        <div class="tech-tag">→ 写入 TOS/matches.json</div>
-        <div class="tech-tag">→ 写入 TOS/hot_topics.json</div>
+  <div class="arch-tri">
+    <!-- 顶行：数据舆情官 ——读取——> AI预测官 -->
+    <div class="arch-tri-top">
+      <!-- Claw-A: 数据舆情官 -->
+      <div class="claw-card">
+        <span class="claw-icon">📊</span>
+        <div class="claw-name">CLAW-A</div>
+        <div class="claw-role">数据舆情官</div>
+        <div class="claw-desc">负责所有赛事相关数据的采集与结构化处理</div>
+        <div class="claw-tech">
+          <div class="tech-tag">football-data.org API</div>
+          <div class="tech-tag">赛程 · 比分 · 积分</div>
+          <div class="tech-tag">B站舆情评论抓取</div>
+          <div class="tech-tag">→ 写入 TOS/matches.json</div>
+        </div>
+      </div>
+
+      <!-- 水平箭头：数据舆情官 → AI预测官 -->
+      <div class="arch-h-arrow">
+        <div class="arch-h-line"></div>
+        <div class="arch-h-label">AI预测官读取数据</div>
+      </div>
+
+      <!-- Claw-B: AI预测官 -->
+      <div class="claw-card">
+        <span class="claw-icon">🎯</span>
+        <div class="claw-name">CLAW-B</div>
+        <div class="claw-role">AI预测官</div>
+        <div class="claw-desc">读取数据官成果，生成AI预测与深度分析</div>
+        <div class="claw-tech">
+          <div class="tech-tag">联网搜索 Harness</div>
+          <div class="tech-tag">AI胜率预测模型</div>
+          <div class="tech-tag">← 读 TOS/matches.json</div>
+          <div class="tech-tag">→ TOS/prediction.json</div>
+        </div>
       </div>
     </div>
 
-    <!-- Arrow A→C -->
-    <div class="arch-arrow">
-      <div class="arrow-line"></div>
-      <div class="arrow-label">TOS<br>写入</div>
-    </div>
+    <!-- 斜向箭头 SVG：数据舆情官→报告官 / AI预测官→报告官 -->
+    <svg class="arch-tri-svg" viewBox="0 0 900 80">
+      <defs>
+        <marker id="arrowG3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <polygon points="0 0, 7 3.5, 0 7" fill="#00C853"/>
+        </marker>
+        <marker id="arrowY3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <polygon points="0 0, 7 3.5, 0 7" fill="#FFD700"/>
+        </marker>
+      </defs>
+      <!-- 数据舆情官 → 报告官 -->
+      <line x1="130" y1="4" x2="358" y2="74" stroke="#00C853" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowG3)"/>
+      <text x="214" y="32" fill="#4CAF50" font-size="11" font-family="Space Mono,monospace" text-anchor="middle" transform="rotate(17,214,32)">TOS 写入</text>
+      <!-- AI预测官 → 报告官 -->
+      <line x1="770" y1="4" x2="542" y2="74" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowY3)"/>
+      <text x="686" y="32" fill="#FFD700" font-size="11" font-family="Space Mono,monospace" text-anchor="middle" transform="rotate(-17,686,32)">TOS 写入</text>
+    </svg>
 
-    <!-- Claw-C CENTER -->
-    <div class="claw-card active">
-      <span class="claw-icon">🔔</span>
-      <div class="claw-name">CLAW-C</div>
-      <div class="claw-role">报告官</div>
-      <div class="claw-desc">核心整合引擎，负责数据聚合、内容生成与全渠道分发</div>
-      <div class="claw-tech">
-        <div class="tech-tag">监听 TOS/ready.json</div>
-        <div class="tech-tag">数据整合 + AI分析</div>
-        <div class="tech-tag">→ 推送 GitHub Pages</div>
-        <div class="tech-tag">→ 推送飞书群</div>
-        <div class="tech-tag">定时任务 08:00</div>
-      </div>
-    </div>
-
-    <!-- Arrow B→C -->
-    <div class="arch-arrow">
-      <div class="arrow-line" style="background:linear-gradient(90deg,rgba(0,200,83,0.2),var(--gold));"></div>
-      <div class="arrow-label">TOS<br>写入</div>
-    </div>
-
-    <!-- Claw-B -->
-    <div class="claw-card">
-      <span class="claw-icon">🎯</span>
-      <div class="claw-name">CLAW-B</div>
-      <div class="claw-role">AI预测官</div>
-      <div class="claw-desc">负责AI胜负概率预测与深度分析专栏内容生成</div>
-      <div class="claw-tech">
-        <div class="tech-tag">联网搜索 Harness</div>
-        <div class="tech-tag">AI胜率预测模型</div>
-        <div class="tech-tag">赔率计算分析</div>
-        <div class="tech-tag">→ 写入 TOS/prediction.json</div>
+    <!-- 底部核心：报告官 -->
+    <div class="arch-tri-bot">
+      <div class="claw-card director active">
+        <span class="claw-icon">🔔</span>
+        <div class="claw-name">CLAW-C</div>
+        <div class="claw-role">报告官</div>
+        <div class="claw-desc">核心整合引擎，负责数据聚合、内容生成与全渠道分发</div>
+        <div class="claw-tech">
+          <div class="tech-tag">监听 TOS/ready.json</div>
+          <div class="tech-tag">数据整合 + AI分析</div>
+          <div class="tech-tag">→ 推送 GitHub Pages</div>
+          <div class="tech-tag">→ 推送飞书群</div>
+          <div class="tech-tag">定时任务 08:00</div>
+        </div>
       </div>
     </div>
   </div>
